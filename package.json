@@ -1,0 +1,11 @@
+{
+  "name": "qufy",
+  "description": "A basic queue system to control file system operations",
+  "version": "0.0.1",
+  "author": "Josemi Juanes <josemijuanes@gmail.com>",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/jmjuanes/qufy.git" },
+  "main": "index.js",
+  "keywords": [ "queue", "fs", "file", "system", "read", "write" ],
+  "dependencies": {  }
+}
