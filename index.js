@@ -11,17 +11,15 @@ queue.add = function(path, cb)
   if(typeof queue.paths[path] === 'undefined')
   {
     //Initialize the tasks list
-    queue.paths[path] = [];
-  }
+    queue.paths[path] = [cb];
 
-  //Add the task method
-  queue.paths[path].push(cb);
-
-  //Check the number of element
-  if(queue.paths[path].length === 1)
-  {
     //Run the queue
     return queue.run(path);
+  }
+  else
+  {
+    //Add the task method
+    queue.paths[path].push(cb);
   }
 };
 
