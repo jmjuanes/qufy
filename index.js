@@ -26,6 +26,9 @@ queue.add = function(path, cb)
 //Run the queue
 queue.run = function(path)
 {
+  //Check if the queue exists
+  if(typeof queue.paths[path] !== 'object'){ return; }
+
   //Check the number of tasks on this path
   if(queue.paths[path].length === 0)
   {
@@ -130,4 +133,11 @@ module.exports.append = function(path, content, opt, cb)
       return next();
     });
   });
+};
+
+//Cancel a queue
+module.exports.cancel = function(file)
+{
+  //Delete the queue associated with file
+  delete queue.paths[file];
 };
