@@ -94,6 +94,30 @@ module.exports.write = function(path, content, opt, cb)
   });
 };
 
+//Exports file append method
+module.exports.append = function(path, content, opt, cb)
+{
+  //Parse the callback
+  cb = parse_callback(opt, cb);
+
+  //Parse the option
+  opt = parse_options(opt);
+
+  //Add to the queue
+  return queue.add(path, function(next)
+  {
+    //Append to the file
+    return fs.appendFile(path, content, opt, function(error)
+    {
+      //Do the callback
+      cb(error);
+
+      //Continue with the next task of the queue
+      return next();
+    });
+  });
+};
+
 //Parse the options
 var parse_options = function(opt)
 {
