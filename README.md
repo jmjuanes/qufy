@@ -21,35 +21,51 @@ npm install --save qufy
 var qufy = require('qufy');
 
 //File to manage 
-var file = './my-file.txt';
+var file1 = './my-file.txt';
 
 //Write to the file 
-qufy.write(file, 'data-to-write', 'utf8', function(error)
+// This will register a new queue associated to `file1`, and will add this write task.
+// Also, this task will be executed directly because there is not waiting tasks on this queue.
+qufy.write(file1, 'data-to-write', 'utf8', function(error)
 {
-  console.log('Write task done!');
+  console.log('Write task to file1 done!');
 });
 
 //Append data to the file
-//This will be called when the previous write task is finished
-qufy.append(file, 'more-data', 'utf8', function(error)
+// This will be added to the queue associated to `file1`. When the previous write task is 
+// completed, this task will be executed.
+qufy.append(file1, 'more-data', 'utf8', function(error)
 {
-  console.log('Append task done!');
+  console.log('Append task to file1 done!');
 });
 
 //Read the file 
-//This will be called when the previous write and append tasks are finished
-qufy.read(file, 'utf8', function(error, data)
+// This will be added to the queue associated to `file1`. When the previous append task is
+// completed, this task will be executed.
+qufy.read(file1, 'utf8', function(error, data)
 {
-  console.log('Read task done!');
+  console.log('Read task to file1 done!');
+});
+
+//Another file 
+var file2 = './my-file-2.txt';
+
+//Write task to file2
+// This will create a new task associated to `file2`. This queue is independent of the queue associated 
+// with `file1`, because paths are not equals.
+qufy.write(file2, 'data-to-write', 'utf8', function(error)
+{
+  console.log('Write task fo file2 done!');
 });
 ```
 
 This will print in console: 
 
 ```
-Write task done!
-Append task done!
-Read task done!
+Write task to file1 done!
+Write task to file2 done!
+Append task to file1 done!
+Read task to file1 done!
 ```
 
 ## API 
