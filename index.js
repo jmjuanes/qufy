@@ -11,7 +11,7 @@ queue.add = function(path, cb)
   if(typeof queue.paths[path] === 'undefined')
   {
     //Initialize the tasks list
-    queue.paths[path] = [cb];
+    queue.paths[path] = [ cb ];
 
     //Run the queue
     return queue.run(path);
@@ -29,7 +29,7 @@ queue.run = function(path)
   //Check the number of tasks on this path
   if(queue.paths[path].length === 0)
   {
-    //Delete the paths
+    //Delete this path object
     delete queue.paths[path];
   }
   else
@@ -49,15 +49,11 @@ queue.run = function(path)
 //Exports file read method
 module.exports.read = function(path, opt, cb)
 {
-  //Check the options
-  if(typeof opt === 'function')
-  {
-    //Save the callback function
-    var cb = opt;
+  //Parse the callback
+  cb = parse_callback(opt, cb);
 
-    //Reset the options
-    opt = {};
-  }
+  //Parse the option
+  opt = parse_options(opt);
 
   //Add to the queue
   return queue.add(path, function(next)
@@ -77,15 +73,11 @@ module.exports.read = function(path, opt, cb)
 //Exports file write method
 module.exports.write = function(path, content, opt, cb)
 {
-  //Check the options
-  if(typeof opt === 'function')
-  {
-    //Save the callback function
-    var cb = opt;
+  //Parse the callback
+  cb = parse_callback(opt, cb);
 
-    //Reset the options
-    opt = {};
-  }
+  //Parse the option
+  opt = parse_options(opt);
 
   //Add to the queue
   return queue.add(path, function(next)
@@ -100,4 +92,18 @@ module.exports.write = function(path, content, opt, cb)
       return next();
     });
   });
+};
+
+//Parse the options
+var parse_options = function(opt)
+{
+  //Return the options object
+  return (typeof opt === 'function') ? {} : opt;
+};
+
+//Parse the callback method
+var parse_callback = function(opt, cb)
+{
+  //Return the callback function
+  return (typeof opt === 'function') ? opt : cb;
 };
