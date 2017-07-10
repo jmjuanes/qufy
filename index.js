@@ -46,6 +46,20 @@ queue.run = function(path)
   }
 };
 
+//Parse the options
+var parse_options = function(opt)
+{
+  //Return the options object
+  return (typeof opt === 'function') ? {} : opt;
+};
+
+//Parse the callback method
+var parse_callback = function(opt, cb)
+{
+  //Return the callback function
+  return (typeof opt === 'function') ? opt : cb;
+};
+
 //Exports file read method
 module.exports.read = function(path, opt, cb)
 {
@@ -116,18 +130,4 @@ module.exports.append = function(path, content, opt, cb)
       return next();
     });
   });
-};
-
-//Parse the options
-var parse_options = function(opt)
-{
-  //Return the options object
-  return (typeof opt === 'function') ? {} : opt;
-};
-
-//Parse the callback method
-var parse_callback = function(opt, cb)
-{
-  //Return the callback function
-  return (typeof opt === 'function') ? opt : cb;
 };
