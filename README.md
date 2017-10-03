@@ -88,6 +88,12 @@ Same API than [fs.writeFile](https://nodejs.org/api/fs.html#fs_fs_writefile_file
 
 This method will create a **write file** task in the queue associated to `path`.
 
+### qufy.unlink(path, callback)
+
+Same API as [fs.unlink](https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback). 
+
+This method will create a **unlink** task in the queue associated to `path`.
+
 ### qufy.cancel(path)
 
 Stop the queue associated to `path`.
