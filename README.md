@@ -72,19 +72,19 @@ Read task to file1 done!
 
 ### qufy.append(path, data\[, options\], callback)
 
-Same API than [fs.appendFile](https://nodejs.org/api/fs.html#fs_fs_appendfile_file_data_options_callback). 
+Same API as [fs.appendFile](https://nodejs.org/api/fs.html#fs_fs_appendfile_file_data_options_callback). 
 
 This method will create an **append to file** task in the queue associated to `path`.
 
 ### qufy.read(path\[, options\], callback)
 
-Same API than [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback).
+Same API as [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback).
 
 This method will create a **read file** task in the queue associated to `path`.
 
 ### qufy.write(path, data\[, options\], callback)
 
-Same API than [fs.writeFile](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback). 
+Same API as [fs.writeFile](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback). 
 
 This method will create a **write file** task in the queue associated to `path`.
 
