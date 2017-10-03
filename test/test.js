@@ -39,4 +39,12 @@ qufy.read(file, 'utf8', function(error, data)
   console.log(data);
 });
 
+//Delete the file
+console.log('Register step 5');
+qufy.unlink(file, function(error)
+{
+  console.log('Step 5 done');
+  console.log(error);
+});
+
 console.log('Tasks register completed');
