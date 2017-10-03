@@ -135,6 +135,24 @@ module.exports.append = function(path, content, opt, cb)
   });
 };
 
+//Unlink a file
+module.exports.unlink = function(path, cb)
+{
+  //Add to the queue
+  return queue.add(path, function(next)
+  {
+    //Unlink the file
+    return fs.unlink(path, function(error)
+    {
+      //Call the callback method
+      cb(error);
+
+      //Continue with the next task in the queue
+      return next();
+    });
+  });
+};
+
 //Cancel a queue
 module.exports.cancel = function(file)
 {
